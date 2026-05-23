@@ -40,7 +40,7 @@ export default function BlenderPage() {
         </div>
 
         {/* ── Sticky Header Navbar ── */}
-        <Header />
+        <Header variant="blender" />
 
         {/* ── Camera HUD Viewfinder Overlay (fades out on scroll) ── */}
         <div id="camera-hud" className={styles.hud}>

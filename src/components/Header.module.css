@@ -1,9 +1,9 @@
 .header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 900; /* sits on top of everything, including Three canvas */
+  z-index: 950; /* sits on top of everything, including Three canvas and overlays */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,11 +13,19 @@
 
 .logoLink {
   display: block;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+  transform: translateY(0);
 }
 
 .logoLink:hover {
   opacity: 0.8;
+}
+
+.logoHidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-15px);
 }
 
 .logoImg {
@@ -46,7 +54,59 @@
 }
 
 .menuBtnActive {
+  color: #ffffff !important;
+}
+
+.menuBtnActive:hover {
   color: var(--gold, #c9a96e) !important;
+}
+
+/* ==========================================
+   ANIMATED MENU TOGGLE ICON
+   ========================================== */
+.menuIconContainer {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dotGridIcon,
+.closeIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.dotGridIcon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.fadeOutRotate {
+  opacity: 0 !important;
+  transform: rotate(-90deg) scale(0.6) !important;
+  pointer-events: none;
+}
+
+.closeIcon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
+  pointer-events: none;
+}
+
+.fadeInRotate {
+  opacity: 1 !important;
+  transform: rotate(0deg) scale(1) !important;
+  pointer-events: auto;
 }
 
 /* Fullscreen slide-down overlay */
@@ -155,3 +215,95 @@
     align-items: flex-start;
   }
 }
+
+/* ==========================================
+   BLENDER PAGE Menu Styles (Centered Variant)
+   ========================================== */
+
+.blenderOverlay {
+  width: 100% !important;
+  height: 100% !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+.blenderNavLinks {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2.2rem !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.blenderNavLink {
+  display: block;
+  font-family: var(--font-sans), sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.55);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  padding-left: 0.25em; /* Compensate for letter-spacing to center text perfectly */
+  cursor: pointer;
+}
+
+.blenderNavLink:hover {
+  color: #ffffff;
+  letter-spacing: 0.3em;
+  padding-left: 0.3em;
+  transform: scale(1.05);
+}
+
+.calendarBtn {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2.8rem;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(245, 240, 232, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cream, #f5f0e8);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.calendarBtnText {
+  margin-right: -0.22em; /* mathematically offset trailing letter-spacing */
+}
+
+.calendarBtn:hover {
+  background: var(--cream, #f5f0e8);
+  color: var(--bg-deep, #0d0b08);
+  border-color: var(--cream, #f5f0e8);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(245, 240, 232, 0.12);
+}
+
+@media (max-width: 768px) {
+  .blenderNavLinks {
+    gap: 1.8rem;
+  }
+
+  .blenderNavLink {
+    font-size: 1.8rem;
+  }
+
+  .calendarBtn {
+    padding: 0.65rem 2.2rem;
+    font-size: 0.65rem;
+  }
+}
+
