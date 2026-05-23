@@ -58,8 +58,22 @@ export default function HeroScene() {
         {/* Soft ambient */}
         <ambientLight color="#3a2a1a" intensity={0.6} />
 
-        {/* Environment for subtle reflections on frame metals */}
-        <Environment preset="sunset" />
+        {/* Environment for subtle reflections on frame metals without remote assets */}
+        <Environment resolution={256}>
+          <ambientLight intensity={0.4} />
+          <mesh rotation={[0, 0, 0]} position={[0, 15, 0]}>
+            <boxGeometry args={[40, 1, 40]} />
+            <meshBasicMaterial color="#ffe4cc" />
+          </mesh>
+          <mesh rotation={[0, 0, 0]} position={[12, 0, -12]}>
+            <boxGeometry args={[1, 20, 20]} />
+            <meshBasicMaterial color="#ff66aa" />
+          </mesh>
+          <mesh rotation={[0, 0, 0]} position={[-12, 0, 12]}>
+            <boxGeometry args={[1, 20, 20]} />
+            <meshBasicMaterial color="#3399ff" />
+          </mesh>
+        </Environment>
 
         {/* ── Scene objects ── */}
         <FilmStrip />

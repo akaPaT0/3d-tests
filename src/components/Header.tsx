@@ -130,6 +130,14 @@ export default function Header({ variant = 'default' }: HeaderProps) {
                 <span className={styles.navNumber}>05</span>
                 <span className={styles.navText}>3D Scene ✦</span>
               </Link>
+              <Link href="/darkroom" className={styles.navLink}>
+                <span className={styles.navNumber}>06</span>
+                <span className={styles.navText}>Darkroom ✦</span>
+              </Link>
+              <Link href="/cosmic-lens" className={styles.navLink}>
+                <span className={styles.navNumber}>07</span>
+                <span className={styles.navText}>Cosmic Lens ✦</span>
+              </Link>
             </nav>
 
             <div className={styles.menuFooter}>

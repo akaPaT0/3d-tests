@@ -1,0 +1,644 @@
+.main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  background: #090404;
+  transition: background-color 0.8s ease;
+}
+
+.safelightTheme {
+  background-color: #090404;
+}
+
+.normalTheme {
+  background-color: #141416;
+}
+
+.canvasWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.overlayContainer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none; /* Let clicks pass to OrbitControls */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.overlayContainer * {
+  pointer-events: auto; /* Re-enable clicks for UI elements */
+}
+
+/* ─── Control Dashboard (Left Sidebar) ─── */
+.controlPanel {
+  position: absolute;
+  top: 7.5rem;
+  left: 3rem;
+  bottom: 3rem;
+  width: 380px;
+  background: rgba(15, 11, 8, 0.72);
+  backdrop-filter: blur(24px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 2.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  z-index: 20;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 169, 110, 0.2) transparent;
+}
+
+.normalTheme .controlPanel {
+  background: rgba(24, 24, 27, 0.75);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.panelHeader {
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold, #c9a96e);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 0.8rem;
+  color: rgba(245, 240, 232, 0.5);
+  line-height: 1.4;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin-bottom: 1.8rem;
+}
+
+.controlGroup {
+  margin-bottom: 1.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.7);
+  margin-bottom: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.flexLabel .label {
+  margin-bottom: 0;
+}
+
+.valueDisplay {
+  font-size: 0.75rem;
+  font-family: monospace;
+  color: var(--gold, #c9a96e);
+  font-weight: 600;
+}
+
+/* ─── Safelight Toggle Switch ─── */
+.safelightToggle {
+  background: #251212;
+  border: 1px solid rgba(255, 9, 43, 0.15);
+  width: 100%;
+  height: 48px;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  padding: 3px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+}
+
+.safelightToggle::before {
+  content: 'RED SAFETY';
+  position: absolute;
+  left: 1.2rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(255, 9, 43, 0.3);
+  transition: color 0.3s;
+}
+
+.safelightToggle::after {
+  content: 'WHITE LIGHT';
+  position: absolute;
+  right: 1.2rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(245, 240, 232, 0.25);
+  transition: color 0.3s;
+}
+
+.switchKnob {
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  z-index: 2;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s, border-color 0.4s;
+}
+
+.activeRed {
+  background: #3d080c;
+  border-color: rgba(255, 9, 43, 0.4);
+  box-shadow: inset 0 0 12px rgba(255, 9, 43, 0.1);
+}
+
+.activeRed::before {
+  color: #ff334b;
+  text-shadow: 0 0 8px rgba(255, 9, 43, 0.6);
+}
+
+.activeRed .switchKnob {
+  transform: translateX(0);
+  background: #ff0c2b;
+  border-color: #ff5269;
+  box-shadow: 0 0 15px rgba(255, 9, 43, 0.6);
+}
+
+.indicatorRed {
+  color: #ff334b;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 6px rgba(255, 9, 43, 0.4);
+}
+
+.indicatorWhite {
+  color: #55c57a;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* ─── Film Stock Grid ─── */
+.filmGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.filmButton {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.filmButton:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.filmButtonSelected {
+  background: rgba(255, 12, 43, 0.04);
+  border-color: rgba(255, 12, 43, 0.4);
+}
+
+.safelightTheme .filmButtonSelected {
+  box-shadow: inset 0 0 8px rgba(255, 12, 43, 0.1), 0 0 12px rgba(255, 12, 43, 0.05);
+}
+
+.normalTheme .filmButtonSelected {
+  background: rgba(201, 169, 110, 0.04);
+  border-color: rgba(201, 169, 110, 0.4);
+}
+
+.filmButtonName {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  margin-bottom: 0.15rem;
+  transition: color 0.25s;
+}
+
+.filmButtonSelected .filmButtonName {
+  color: #ff334b;
+}
+
+.normalTheme .filmButtonSelected .filmButtonName {
+  color: var(--gold, #c9a96e);
+}
+
+.filmButtonType {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(245, 240, 232, 0.35);
+}
+
+.helperText {
+  font-size: 0.65rem;
+  color: rgba(245, 240, 232, 0.35);
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+/* ─── Range Sliders ─── */
+.rangeInput {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--gold, #c9a96e);
+  border: 2px solid #000000;
+  transition: transform 0.2s;
+}
+
+.safelightTheme .rangeInput::-webkit-slider-thumb {
+  background: #ff0c2b;
+  box-shadow: 0 0 10px rgba(255, 12, 43, 0.6);
+}
+
+.rangeInput::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* ─── Action Button (Shutter Trigger) ─── */
+.actionSection {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.shutterButton {
+  width: 100%;
+  background: #ff0c2b;
+  border: 1px solid #ff5269;
+  color: #ffffff;
+  padding: 1.1rem;
+  border-radius: 8px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255, 12, 43, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.shutterButton:hover {
+  background: #ff334b;
+  box-shadow: 0 12px 32px rgba(255, 12, 43, 0.45);
+  transform: translateY(-2px);
+}
+
+.shutterButton:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 12px rgba(255, 12, 43, 0.2);
+}
+
+.shutterButtonDisabled {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(245, 240, 232, 0.25) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.shutterDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: block;
+}
+
+.shutterButtonDisabled .shutterDot {
+  background: rgba(245, 240, 232, 0.2);
+}
+
+.shutterButton:not(.shutterButtonDisabled) .shutterDot {
+  animation: pulseShutter 1.5s infinite alternate;
+}
+
+@keyframes pulseShutter {
+  from { opacity: 0.3; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1.1); }
+}
+
+/* ─── HUD Chronometer (Center Bottom) ─── */
+.hudTimer {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  background: rgba(15, 11, 8, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 12, 43, 0.15);
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.safelightTheme .hudTimer {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 0 12px rgba(255, 12, 43, 0.05);
+}
+
+.normalTheme .hudTimer {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.timerDigital {
+  font-family: monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ff223a;
+  text-shadow: 0 0 12px rgba(255, 34, 58, 0.5);
+  min-width: 110px;
+  text-align: right;
+  line-height: 1;
+}
+
+.normalTheme .timerDigital {
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.timerLabels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.timerLabels span:first-child {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(245, 240, 232, 0.4);
+}
+
+.ledStatusGrid {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.led {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.3s;
+}
+
+.led::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+
+.ledFlashActive {
+  color: #ffcc00 !important;
+  text-shadow: 0 0 6px rgba(255, 204, 0, 0.6);
+}
+
+.ledReactActive {
+  color: #ff334b !important;
+  text-shadow: 0 0 6px rgba(255, 51, 75, 0.6);
+}
+
+.ledReadyActive {
+  color: #55c57a !important;
+  text-shadow: 0 0 6px rgba(85, 197, 122, 0.6);
+}
+
+/* ─── Scroll Hint & UI Margins ─── */
+.scrollHint {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.28);
+}
+
+/* ─── Magnifier Inspection Modal Overlay ─── */
+.magnifierOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 990; /* Sit above navbar header */
+  background: rgba(10, 8, 7, 0.94);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.magnifierCard {
+  position: relative;
+  max-width: 480px;
+  width: 90%;
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.closeOverlayBtn {
+  position: absolute;
+  top: -3.5rem;
+  right: 0;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.closeOverlayBtn:hover {
+  opacity: 1;
+}
+
+/* ─── Iconic Polaroid Card Frame ─── */
+.polaroidFrame {
+  background: #ffffff;
+  padding: 1.5rem 1.5rem 2.8rem;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.polaroidImage {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #111111;
+  filter: contrast(1.05) brightness(0.98);
+}
+
+.polaroidLabel {
+  margin-top: 1.2rem;
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.polaroidLabelTitle {
+  font-size: 1rem;
+  font-weight: 500;
+  font-style: italic;
+  color: #1e1e1e;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+
+.polaroidLabelMeta {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(30, 30, 30, 0.45);
+  text-transform: uppercase;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px) scale(0.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ─── Responsive Media Queries ─── */
+@media (max-width: 1024px) {
+  .controlPanel {
+    width: 320px;
+    left: 2rem;
+    padding: 1.8rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .canvasWrapper {
+    height: 60vh;
+    position: relative;
+  }
+
+  .overlayContainer {
+    position: relative;
+    height: auto;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .controlPanel {
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 2rem;
+    box-shadow: none;
+  }
+
+  .hudTimer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid rgba(255, 12, 43, 0.1);
+    box-shadow: none;
+    padding: 1.5rem 2rem;
+    justify-content: space-between;
+  }
+
+  .scrollHint {
+    display: none;
+  }
+}

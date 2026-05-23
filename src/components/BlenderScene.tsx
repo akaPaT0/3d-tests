@@ -213,8 +213,24 @@ export default function BlenderScene() {
         <pointLight position={[-4, -2, 7]} color="#4a6fa5" intensity={1} distance={20} decay={2} />
         <pointLight position={[0, -3, 6]} color="#c4838a" intensity={0.5} distance={15} decay={2} />
 
-        {/* Environment: For realistic reflections on the camera body */}
-        <Environment preset="sunset" />
+        {/* Environment: For realistic reflections on the camera body without remote downloads */}
+        <Environment resolution={256}>
+          <ambientLight intensity={0.3} />
+          {/* Top bright glow */}
+          <mesh rotation={[0, 0, 0]} position={[0, 12, 0]}>
+            <boxGeometry args={[30, 1, 30]} />
+            <meshBasicMaterial color="#ffe3cc" />
+          </mesh>
+          {/* Side colored panels for rich dynamic reflections */}
+          <mesh rotation={[0, 0, 0]} position={[10, 2, -10]}>
+            <boxGeometry args={[1, 15, 15]} />
+            <meshBasicMaterial color="#ff77bb" />
+          </mesh>
+          <mesh rotation={[0, 0, 0]} position={[-10, -2, 10]}>
+            <boxGeometry args={[1, 15, 15]} />
+            <meshBasicMaterial color="#4488ff" />
+          </mesh>
+        </Environment>
 
         {/* The Blender scene + all animations */}
         <BlenderModel />
