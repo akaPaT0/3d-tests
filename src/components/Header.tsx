@@ -36,7 +36,7 @@ export default function Header({ variant = 'default' }: HeaderProps) {
     <>
       <header className={styles.header}>
         <Link
-          href="/"
+          href="/photography"
           className={`${styles.logoLink} ${menuOpen ? styles.logoHidden : ''}`}
           id="back-to-home"
         >
@@ -91,7 +91,7 @@ export default function Header({ variant = 'default' }: HeaderProps) {
       <div className={`${styles.menuOverlay} ${menuOpen ? styles.menuOpen : ''} ${variant === 'blender' ? styles.blenderOverlay : ''}`}>
         {variant === 'blender' ? (
           <nav className={styles.blenderNavLinks}>
-            <Link href="/" className={styles.blenderNavLink}>
+            <Link href="/photography" className={styles.blenderNavLink}>
               Home
             </Link>
             <a href="#packages" className={styles.blenderNavLink} onClick={() => setMenuOpen(false)}>
@@ -110,19 +110,19 @@ export default function Header({ variant = 'default' }: HeaderProps) {
         ) : (
           <>
             <nav className={styles.navLinks}>
-              <Link href="/" className={styles.navLink}>
+              <Link href="/photography" className={styles.navLink}>
                 <span className={styles.navNumber}>01</span>
                 <span className={styles.navText}>Home</span>
               </Link>
-              <a href="/#portfolio" className={styles.navLink} onClick={() => setMenuOpen(false)}>
+              <a href="/photography#portfolio" className={styles.navLink} onClick={() => setMenuOpen(false)}>
                 <span className={styles.navNumber}>02</span>
                 <span className={styles.navText}>Portfolio</span>
               </a>
-              <a href="/#about" className={styles.navLink} onClick={() => setMenuOpen(false)}>
+              <a href="/photography#about" className={styles.navLink} onClick={() => setMenuOpen(false)}>
                 <span className={styles.navNumber}>03</span>
                 <span className={styles.navText}>About</span>
               </a>
-              <a href="/#contact" className={styles.navLink} onClick={() => setMenuOpen(false)}>
+              <a href="/photography#contact" className={styles.navLink} onClick={() => setMenuOpen(false)}>
                 <span className={styles.navNumber}>04</span>
                 <span className={styles.navText}>Contact</span>
               </a>

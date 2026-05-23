@@ -1,0 +1,208 @@
+.menuWrapper {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  font-family: var(--font-sans);
+}
+
+.fab {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(13, 11, 8, 0.85);
+  border: 1px solid rgba(201, 169, 110, 0.35);
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 0 10px rgba(201, 169, 110, 0.05);
+  backdrop-filter: blur(8px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fab:hover {
+  border-color: var(--gold);
+  transform: scale(1.05);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    0 0 15px rgba(201, 169, 110, 0.2);
+}
+
+.fabActive {
+  background: var(--gold);
+  border-color: var(--gold-light);
+  color: #0d0b08;
+}
+
+.fabIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease;
+}
+
+.fabActive .fabIcon {
+  transform: rotate(135deg);
+}
+
+.panel {
+  position: absolute;
+  bottom: 4rem;
+  right: 0;
+  width: 250px;
+  height: 250px;
+  background: rgba(13, 11, 8, 0.96);
+  border: 1px solid rgba(201, 169, 110, 0.25);
+  border-radius: 16px;
+  box-shadow: 
+    0 24px 70px rgba(0, 0, 0, 0.85),
+    0 0 40px rgba(201, 169, 110, 0.03);
+  backdrop-filter: blur(16px);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: bottom right;
+  opacity: 0;
+  transform: scale(0.8) translateY(10px);
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.panelOpen {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: all;
+}
+
+.gridContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+/* Reticle Lines */
+.gridContainer::before {
+  content: '';
+  position: absolute;
+  inset: 1.8rem;
+  border: 1px dashed rgba(201, 169, 110, 0.15);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.horizontalLine {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(201, 169, 110, 0.2) 20%,
+    rgba(201, 169, 110, 0.2) 80%,
+    transparent
+  );
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.verticalLine {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(201, 169, 110, 0.2) 20%,
+    rgba(201, 169, 110, 0.2) 80%,
+    transparent
+  );
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.gridItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(245, 240, 232, 0.6);
+  transition: all 0.3s ease;
+  z-index: 1;
+  text-decoration: none;
+}
+
+.outerItem {
+  border-radius: 8px;
+  background: rgba(26, 20, 14, 0.2);
+  border: 1px solid rgba(245, 240, 232, 0.05);
+}
+
+.outerItem:hover {
+  color: var(--cream);
+  border-color: rgba(201, 169, 110, 0.3);
+  background: rgba(201, 169, 110, 0.08);
+  box-shadow: 0 0 10px rgba(201, 169, 110, 0.05);
+}
+
+.icon {
+  margin-bottom: 0.25rem;
+  transition: transform 0.3s ease;
+}
+
+.outerItem:hover .icon {
+  transform: translateY(-2px);
+}
+
+.label {
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Center Home Button */
+.centerItem {
+  grid-column: 2;
+  grid-row: 2;
+  border-radius: 50%;
+  background: rgba(201, 169, 110, 0.1);
+  border: 1px solid rgba(201, 169, 110, 0.45);
+  color: var(--gold);
+  box-shadow: 0 0 15px rgba(201, 169, 110, 0.05);
+}
+
+.centerItem:hover {
+  background: var(--gold);
+  color: #0d0b08;
+  border-color: var(--gold-light);
+  box-shadow: 
+    0 0 20px rgba(201, 169, 110, 0.3),
+    inset 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.centerItem .icon {
+  margin-bottom: 0.15rem;
+}
+
+.centerItem:hover .icon {
+  transform: scale(1.1);
+}
+
+/* Grid layout placements */
+.topLeft { grid-column: 1; grid-row: 1; }
+.topRight { grid-column: 3; grid-row: 1; }
+.bottomLeft { grid-column: 1; grid-row: 3; }
+.bottomRight { grid-column: 3; grid-row: 3; }

@@ -135,7 +135,7 @@ export default function CosmicLensHUD({
               DISENGAGE WARP FIELD
             </button>
           ) : (
-            <Link href="/" className={styles.backBtn} id="exit-lens-btn">
+            <Link href="/photography" className={styles.backBtn} id="exit-lens-btn">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M19 12H5M12 19l-7-7 7-7" />
               </svg>

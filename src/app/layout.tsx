@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import GlobalMenu from "@/components/GlobalMenu";
 
 export const metadata: Metadata = {
   title: "Patrick Moreau — Wedding & Events Photography",
@@ -20,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <GlobalMenu />
+      </body>
     </html>
   );
 }
