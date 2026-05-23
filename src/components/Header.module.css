@@ -1,0 +1,157 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900; /* sits on top of everything, including Three canvas */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.5rem 3rem;
+  pointer-events: all;
+}
+
+.logoLink {
+  display: block;
+  transition: opacity 0.25s ease;
+}
+
+.logoLink:hover {
+  opacity: 0.8;
+}
+
+.logoImg {
+  height: 52px; /* Increased from 22px to make it prominent and highly visible */
+  width: auto;
+  display: block;
+  filter: brightness(1) contrast(1.05);
+}
+
+.menuBtn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  transition: all 0.25s ease;
+  z-index: 1000; /* keeps button interactive when menu overlay is open */
+}
+
+.menuBtn:hover {
+  opacity: 0.7;
+  transform: scale(1.05);
+}
+
+.menuBtnActive {
+  color: var(--gold, #c9a96e) !important;
+}
+
+/* Fullscreen slide-down overlay */
+.menuOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: rgba(10, 8, 6, 0.96); /* deep rich charcoal black to match warm theme */
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 7rem 4rem 4rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s ease;
+}
+
+.menuOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  max-width: 600px;
+  margin: auto 0;
+}
+
+.navLink {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  font-family: var(--font-sans), sans-serif;
+  text-decoration: none;
+  color: rgba(245, 240, 232, 0.55);
+  transition: color 0.3s ease;
+  width: fit-content;
+}
+
+.navNumber {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gold, #c9a96e);
+  letter-spacing: 0.1em;
+}
+
+.navText {
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navLink:hover {
+  color: #ffffff;
+}
+
+.navLink:hover .navText {
+  transform: translateX(12px);
+}
+
+.menuFooter {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 2rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.28);
+}
+
+/* ==========================================
+   RESPONSIVE Adjustments
+   ========================================== */
+@media (max-width: 768px) {
+  .header {
+    padding: 1.8rem 2rem;
+  }
+
+  .logoImg {
+    height: 40px; /* legible but scaled nicely for mobile screens */
+  }
+
+  .menuOverlay {
+    padding: 6rem 2rem 2rem;
+  }
+
+  .navLinks {
+    gap: 1.5rem;
+  }
+
+  .navText {
+    font-size: 2.2rem;
+  }
+
+  .menuFooter {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,298 @@
+/* ==========================================
+   LAYOUT
+   ========================================== */
+.main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #0d0b08;
+}
+
+.canvasWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 3rem;
+  pointer-events: all;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.logoLine {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: rgba(201, 169, 110, 0.6);
+}
+
+.logoText {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.8);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.navLink {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.5);
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.navLink:hover {
+  color: var(--gold-light);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* ==========================================
+   HERO CONTENT
+   ========================================== */
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  pointer-events: all;
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  max-width: 560px;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 5.5vw, 5.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  text-shadow:
+    0 2px 40px rgba(13, 11, 8, 0.9),
+    0 0 80px rgba(201, 169, 110, 0.08);
+}
+
+/* Italic "deserves" in gold */
+.title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+  text-shadow:
+    0 0 30px rgba(201, 169, 110, 0.4),
+    0 0 60px rgba(201, 169, 110, 0.15);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(245, 240, 232, 0.45);
+  max-width: 380px;
+  font-weight: 300;
+}
+
+/* ==========================================
+   CTA BUTTONS
+   ========================================== */
+.ctas {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-top: 0.25rem;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 2rem;
+  border-radius: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #0d0b08;
+  background: var(--gold);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaPrimary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold-light);
+  transform: translateX(-100%);
+  transition: transform 0.35s ease;
+}
+
+.ctaPrimary:hover::before {
+  transform: translateX(0);
+}
+
+.ctaPrimary:hover {
+  box-shadow: 0 8px 32px rgba(201, 169, 110, 0.35);
+}
+
+.ctaPrimary span,
+.ctaPrimary {
+  position: relative;
+  z-index: 1;
+}
+
+.ctaGhost {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.6);
+  border: 1px solid rgba(245, 240, 232, 0.15);
+  transition: all 0.3s ease;
+}
+
+.ctaGhost:hover {
+  color: var(--gold-light);
+  border-color: rgba(201, 169, 110, 0.4);
+  background: rgba(201, 169, 110, 0.05);
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+.footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 1.5rem 3rem 2rem;
+  pointer-events: all;
+}
+
+.footerTag {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.28);
+}
+
+.scrollHint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.3);
+}
+
+.scrollDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.5;
+  animation: scrollBounce 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%       { transform: translateY(6px); opacity: 1; }
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+  .header {
+    padding: 1.5rem;
+  }
+
+  .nav {
+    gap: 1.5rem;
+  }
+
+  .hero {
+    padding: 0 1.5rem;
+    align-items: flex-end;
+    padding-bottom: 6rem;
+  }
+
+  .title {
+    font-size: clamp(2.4rem, 8vw, 3.5rem);
+  }
+
+  .footer {
+    padding: 1rem 1.5rem 1.5rem;
+  }
+
+  .footerLeft,
+  .footerRight {
+    display: none;
+  }
+
+  .scrollHint {
+    width: 100%;
+    align-items: center;
+  }
+}
